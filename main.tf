@@ -19,7 +19,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = var.vnet-rg-name-weu
+  name     = var.vnet_rg_name_weu
   location = var.location
 
   tags = var.tags
