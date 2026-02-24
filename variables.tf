@@ -1,4 +1,4 @@
-variable "vnet-rg-weu"{
+variable "vnet_rg_name_weu"{
     description = "Name of the VNet RG in weu"
     type = string
 }
