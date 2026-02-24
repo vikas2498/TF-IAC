@@ -18,6 +18,8 @@ provider "azurerm" {
   features{}
 }
 
+#resource group for dev network resources
+
 resource "azurerm_resource_group" "rg" {
   name     = var.vnet_rg_name_weu
   location = var.location

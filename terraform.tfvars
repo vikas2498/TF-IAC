@@ -1,4 +1,4 @@
-vnet_rg_name_weu = "sub-200-weu-rg-net"
+vnet_rg_name_weu = "sub-200-weu-dev-rg-net"
 location = "West Europe"
 
 tags = {
