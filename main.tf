@@ -26,3 +26,44 @@ resource "azurerm_resource_group" "rg" {
 
   tags = var.tags
 }
+resource "azurerm_network_security_group" "weu-dev-app-nsg" {
+    name = var.weu_dev_app_nsg
+    location = var.location
+    resource_group_name = var.vnet_rg_name_weu
+}
+
+resource "azurerm_network_security_group" "weu-dev-db-nsg" {
+    name = var.weu_dev_db_nsg
+    location = var.location
+    resource_group_name = var.vnet_rg_name_weu
+}
+
+resource "azurerm_network_security_group" "weu-dev-pe-nsg" {
+    name = weu_dev_pe_nsg
+    location = var.location
+    resource_group_name = var.vnet_rg_name_weu
+}
+
+resource "azurerm_virtual_network" "dev-app-vnet-weu" {
+ name = var.dev_app_vnet_weu_name
+ location = var.location
+ resource_group_name = var.vnet_rg_name_weu
+ address_space = var.weu_dev_vnet_address_space
+
+ subnet {
+    name = var.weu_dev_app_subnet
+    address_prefixes = var.weu_dev_app_subnet_address
+    security_group = azurerm_network_security_group.weu-dev-app-nsg.id
+ }
+subnet {
+    name = var.weu_dev_db_subnet
+    address_prefixes = var.weu_dev_db_subnet_address
+    security_group = azurerm_network_security_group.weu-dev-db-nsg.id
+ }
+ subnet {
+    name = var.var.weu_dev_pe_subnet
+    address_prefixes = var.weu_dev_pe_subnet_address
+    security_group = azurerm_network_security_group.weu-dev-pe-nsg.id
+ }
+
+}
