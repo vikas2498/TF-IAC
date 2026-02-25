@@ -61,7 +61,7 @@ subnet {
     security_group = azurerm_network_security_group.weu-dev-db-nsg.id
  }
  subnet {
-    name = var.var.weu_dev_pe_subnet
+    name = var.weu_dev_pe_subnet
     address_prefixes = var.weu_dev_pe_subnet_address
     security_group = azurerm_network_security_group.weu-dev-pe-nsg.id
  }
