@@ -39,7 +39,7 @@ resource "azurerm_network_security_group" "weu-dev-db-nsg" {
 }
 
 resource "azurerm_network_security_group" "weu-dev-pe-nsg" {
-    name = weu_dev_pe_nsg
+    name = var.weu_dev_pe_nsg
     location = var.location
     resource_group_name = var.vnet_rg_name_weu
 }
