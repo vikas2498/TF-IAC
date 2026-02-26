@@ -3,7 +3,7 @@ location = "West Europe"
 
 tags = {
     Resource = "Resource Group"
-    Environment = "Developement"
+    Environment = "Production"
     WBS = "200"
 }
 
