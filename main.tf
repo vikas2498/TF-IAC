@@ -79,5 +79,9 @@ resource "azurerm_subnet" "webapp" {
   resource_group_name  = var.vnet_rg_name_weu
   virtual_network_name = azurerm_virtual_network.dev-app-vnet-weu.name
   address_prefixes     = var.weu_dev-webapp_subnet_address
-  security_group       = azurerm_network_security_group.weu-dev-webapp-nsg.id
+}
+
+resource "azurerm_subnet_network_security_group_association" "webapp-nsg" {
+  subnet_id                 = azurerm_subnet.webapp.id
+  network_security_group_id = azurerm_network_security_group.weu-dev-webapp-nsg.id
 }
