@@ -23,8 +23,12 @@ weu_dev_db_subnet = "sub-200-weu-dev-db-snt"
 
 weu_dev_pe_subnet = "sub-200-weu-dev-pe-snt"
 
+weu_dev_webapp_subnet = "sub-200-weu-dev-webapp"
+
 weu_dev_app_subnet_address = ["10.0.1.0/24"]
 
 weu_dev_db_subnet_address = ["10.0.2.0/24"]
 
 weu_dev_pe_subnet_address = ["10.0.3.0/24"]
+
+weu_dev-webapp_subnet_address = ["10.0.4.0/24"]

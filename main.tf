@@ -67,3 +67,10 @@ subnet {
  }
 
 }
+
+resource "azurerm_subnet" "webapp" {
+  name                 = var.weu_dev_webapp_subnet
+  resource_group_name  = var.vnet_rg_name_weu
+  virtual_network_name = azurerm_virtual_network.dev-app-vnet-weu.id
+  address_prefixes     = var.weu_dev-webapp_subnet_address
+}

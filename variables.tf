@@ -68,3 +68,13 @@ variable "weu_dev_pe_subnet_address" {
      description = "pe subnet address space"
      type = list(string)
 }
+
+variable "weu_dev_webapp_subnet"{
+    description = "webapp subnet name"
+    type = string
+}
+
+variable "weu_dev-webapp_subnet_address"{
+    type = list(string)
+    description = "subnet address"
+}
