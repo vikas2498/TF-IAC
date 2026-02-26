@@ -44,6 +44,12 @@ resource "azurerm_network_security_group" "weu-dev-pe-nsg" {
     resource_group_name = var.vnet_rg_name_weu
 }
 
+resource "azurerm_network_security_group" "weu-dev-webapp-nsg" {
+    name = var.weu_dev_webapp_nsg
+    location = var.location
+    resource_group_name = var.vnet_rg_name_weu
+}
+
 resource "azurerm_virtual_network" "dev-app-vnet-weu" {
  name = var.dev_app_vnet_weu_name
  location = var.location

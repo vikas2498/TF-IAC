@@ -13,6 +13,8 @@ weu_dev_db_nsg = "sub-200-weu-dev-db-nsg"
 
 weu_dev_pe_nsg = "sub-200-weu-dev-pe-nsg"
 
+weu_dev_webapp_nsg = "sub-200-weu-dev-webapp-nsg"
+
 dev_app_vnet_weu_name = "sub-200-weu-dev-vnet"
 
 weu_dev_vnet_address_space = ["10.0.0.0/16"]

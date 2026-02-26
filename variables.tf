@@ -29,6 +29,11 @@ variable "weu_dev_pe_nsg" {
     type = string
 }
 
+variable "weu_dev_webapp_nsg" {
+    description = "pe nsg name"
+    type = string
+}
+
 variable "dev_app_vnet_weu_name" {
     description = "dev app vnet name"
     type = string
