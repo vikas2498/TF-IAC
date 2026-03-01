@@ -78,7 +78,7 @@ resource "azurerm_subnet" "app" {
   name                 = var.weu_dev_app_subnet
   resource_group_name  = var.vnet_rg_name_weu
   virtual_network_name = azurerm_virtual_network.dev-app-vnet-weu.name
-  address_prefixes     = var.weu_dev-webapp_subnet_address
+  address_prefixes     = var.weu_dev_app_subnet_address
 }
 
 resource "azurerm_subnet" "db" {
