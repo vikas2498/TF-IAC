@@ -61,23 +61,6 @@ resource "azurerm_virtual_network" "dev-app-vnet-weu" {
  location = var.location
  resource_group_name = var.vnet_rg_name_weu
  address_space = var.weu_dev_vnet_address_space
-
- # subnet {
- #   name = var.weu_dev_app_subnet
- #   address_prefixes = var.weu_dev_app_subnet_address
- #   security_group = azurerm_network_security_group.weu-dev-app-nsg.id
- # }
-# subnet {
-#    name = var.weu_dev_db_subnet
-#    address_prefixes = var.weu_dev_db_subnet_address
-#    security_group = azurerm_network_security_group.weu-dev-db-nsg.id
-# }
-# subnet {
-#    name = var.weu_dev_pe_subnet
-#    address_prefixes = var.weu_dev_pe_subnet_address
-#    security_group = azurerm_network_security_group.weu-dev-pe-nsg.id
-# }
-
 }
 
 resource "azurerm_subnet" "app" {
@@ -137,5 +120,5 @@ resource "azurerm_subnet_network_security_group_association" "webapp-nsg" {
 
 resource "azurerm_subnet_network_security_group_association" "sfc-nsg" {
   subnet_id                 = azurerm_subnet.sfc.id
-  network_security_group_id = azurerm_network_security_group.weu-dev-webapp-nsg.id
+  network_security_group_id = azurerm_network_security_group.weu-dev-sfc-nsg.id
 }
