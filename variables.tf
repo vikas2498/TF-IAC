@@ -34,6 +34,11 @@ variable "weu_dev_webapp_nsg" {
     type = string
 }
 
+variable "weu_dev_sfc_nsg" {
+    description = "pe nsg name"
+    type = string
+}
+
 variable "dev_app_vnet_weu_name" {
     description = "dev app vnet name"
     type = string
@@ -59,10 +64,16 @@ variable "weu_dev_pe_subnet" {
     type = string
 }
 
+variable "weu_dev_sfc_subnet" {
+    description = "pe subnet name"
+    type = string
+}
+
 variable "weu_dev_app_subnet_address" {
      description = "app subnet address space"
      type = list(string)
 }
+
 
 variable "weu_dev_db_subnet_address" {
      description = "db subnet address space"
@@ -80,6 +91,11 @@ variable "weu_dev_webapp_subnet"{
 }
 
 variable "weu_dev-webapp_subnet_address"{
+    type = list(string)
+    description = "subnet address"
+}
+
+variable "weu_dev_sfc_subnet_address"{
     type = list(string)
     description = "subnet address"
 }

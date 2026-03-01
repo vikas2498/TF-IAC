@@ -1,22 +1,22 @@
-terraform {
-backend "azurerm" {
-    key                  = "Non-prod/Dev-Network-remote-file-weu.terraform.tfstate"
-    resource_group_name  = "dev-tfstate-rg"
-    storage_account_name = "devtfstatestgacc"
-    container_name       = "devtfstatestgacc-cont"
-  }
+# terraform {
+# backend "azurerm" {
+#    key                  = "Non-prod/Dev-Network-remote-file-weu.terraform.tfstate"
+#    resource_group_name  = "dev-tfstate-rg"
+#    storage_account_name = "devtfstatestgacc"
+#    container_name       = "devtfstatestgacc-cont"
+#  }
 
-  required_providers {
-    azurerm = {
-      source = "hashicorp/azurerm"
-      version = "4.61.0"
-    }
-  }
-}
+# required_providers {
+#    azurerm = {
+#      source = "hashicorp/azurerm"
+#      version = "4.61.0"
+#    }
+#  }
+# }
 
-provider "azurerm" {
-  features{}
-}
+# provider "azurerm" {
+#  features{}
+# }
 
 #resource group for dev network resources
 
@@ -46,6 +46,12 @@ resource "azurerm_network_security_group" "weu-dev-pe-nsg" {
 
 resource "azurerm_network_security_group" "weu-dev-webapp-nsg" {
     name = var.weu_dev_webapp_nsg
+    location = var.location
+    resource_group_name = var.vnet_rg_name_weu
+}
+
+resource "azurerm_network_security_group" "weu-dev-sfc-nsg" {
+    name = var.weu_dev_sfc_nsg
     location = var.location
     resource_group_name = var.vnet_rg_name_weu
 }
@@ -102,6 +108,13 @@ resource "azurerm_subnet" "webapp" {
   address_prefixes     = var.weu_dev-webapp_subnet_address
 }
 
+resource "azurerm_subnet" "sfc" {
+  name                 = var.weu_dev_sfc_subnet
+  resource_group_name  = var.vnet_rg_name_weu
+  virtual_network_name = azurerm_virtual_network.dev-app-vnet-weu.name
+  address_prefixes     = var.weu_dev_sfc_subnet_address
+}
+
 resource "azurerm_subnet_network_security_group_association" "app-nsg" {
   subnet_id                 = azurerm_subnet.app.id
   network_security_group_id = azurerm_network_security_group.weu-dev-app-nsg.id
@@ -119,5 +132,10 @@ resource "azurerm_subnet_network_security_group_association" "pe-nsg" {
 
 resource "azurerm_subnet_network_security_group_association" "webapp-nsg" {
   subnet_id                 = azurerm_subnet.webapp.id
+  network_security_group_id = azurerm_network_security_group.weu-dev-webapp-nsg.id
+}
+
+resource "azurerm_subnet_network_security_group_association" "sfc-nsg" {
+  subnet_id                 = azurerm_subnet.sfc.id
   network_security_group_id = azurerm_network_security_group.weu-dev-webapp-nsg.id
 }
