@@ -144,8 +144,12 @@ resource "azurerm_resource_group" "D01" {
 
 resource "azurerm_network_interface" "D01" {
   name                = "${var.D01_VM_Name}-nic01"
-  location            = data.azurerm_resource_group.dev-vnet-rg.location
+  location            = azurerm_resource_group.D01.location
   resource_group_name = var.D01_rg
+
+  depends_on = [
+    azurerm_resource_group.D01
+  ]
 
   ip_configuration {
     name                          = "ipconfig01"
