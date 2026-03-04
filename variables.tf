@@ -35,7 +35,7 @@ variable "weu_dev_webapp_nsg" {
 }
 
 variable "weu_dev_sfc_nsg" {
-    description = "pe nsg name"
+    description = "sfc nsg name"
     type = string
 }
 
@@ -98,4 +98,19 @@ variable "weu_dev-webapp_subnet_address"{
 variable "weu_dev_sfc_subnet_address"{
     type = list(string)
     description = "subnet address"
+}
+
+variable "D01_rg" {
+    type = string
+    description = "D01 vm rg name"
+}
+
+variable "D01_VM_Name" {
+    type = string
+    description = "D01 VM name"
+}
+
+variable "D01_VM_Size" {
+    type = string 
+    description = "vm size"
 }
