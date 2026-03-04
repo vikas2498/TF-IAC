@@ -40,3 +40,9 @@ weu_dev_pe_subnet_address = ["10.0.3.0/24"]
 weu_dev-webapp_subnet_address = ["10.0.4.0/24"]
 
 weu_dev_sfc_subnet_address = ["10.0.5.0/24"]
+
+D01_rg = "sub-200-weu-dev-rg-D01"
+
+D01_VM_Name = "200weuwappd01"
+
+D01_VM_Size = "Standard_B2s"
