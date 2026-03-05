@@ -114,3 +114,28 @@ variable "D01_VM_Size" {
     type = string 
     description = "vm size"
 }
+
+variable "D02_rg_name" {
+    type = string
+}
+variable "D02_location" {
+    type = string
+}
+
+variable "D02_vms" {
+    type = map(object({
+    os_type         = string
+    vm_size         = string
+    subnet_name     = string
+    private_ips     = list(string)
+    admin_username  = string
+    admin_password  = string
+    os_disk_caching = string
+    os_storage_account_type = string
+    os_disk_sizeGB  = string
+    publisher       = "string"
+    offer           = "string"
+    sku             = "string"
+    version         = "string"
+    }))
+}
