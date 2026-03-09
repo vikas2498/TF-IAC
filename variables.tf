@@ -126,6 +126,7 @@ variable "D02_vms" {
     type = map(object({
     os_type         = string
     vm_size         = string
+    vnet_name       = string
     subnet_name     = string
     private_ips     = list(string)
     admin_username  = string
@@ -133,9 +134,9 @@ variable "D02_vms" {
     os_disk_caching = string
     os_storage_account_type = string
     os_disk_sizeGB  = string
-    publisher       = "string"
-    offer           = "string"
-    sku             = "string"
-    version         = "string"
+    publisher       = string
+    offer           = string
+    sku             = string
+    version         = string
     }))
 }

@@ -52,7 +52,7 @@ D02_rg_name = "sub-200-weu-dev-rg-D02"
 D02_location = "West Europe"
 
 D02_vms = {
-    200weulappd0201 = {
+    "200weulappd0201" = {
     os_type         = "linux"
     vm_size         = "Standard_B2s"
     vnet_name       = "sub-200-weu-dev-vnet"
@@ -69,7 +69,7 @@ D02_vms = {
     version   = "latest"
     }
 
-    200weuwappd0201 = {
+    "200weuwappd0201" = {
     os_type         = "windows"
     vm_size         = "Standard_B2s"
     vnet_name       = "sub-200-weu-dev-vnet"
@@ -86,7 +86,7 @@ D02_vms = {
     version   = "latest"
     }
 
-    200weuwappd0202 = {
+    "200weuwappd0202" = {
     os_type         = "windows"
     vm_size         = "Standard_B2s"
     vnet_name       = "sub-200-weu-dev-vnet"
