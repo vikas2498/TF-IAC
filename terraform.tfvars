@@ -45,7 +45,7 @@ D01_rg = "sub-200-weu-dev-rg-D01"
 
 D01_VM_Name = "200weuwappd01"
 
-D01_VM_Size = "Standard_B4ms"
+D01_VM_Size = "Standard_B2s"
 
 D02_rg_name = "sub-200-weu-dev-rg-D02"
 
