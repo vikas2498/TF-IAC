@@ -103,3 +103,4 @@ D02_vms = {
     version   = "latest"
     }
 }
+D01_VM_Size = "Standard_B4ms"
