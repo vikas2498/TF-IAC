@@ -133,7 +133,7 @@ variable "D02_vms" {
     admin_password  = string
     os_disk_caching = string
     os_storage_account_type = string
-    os_disk_sizeGB  = string
+    os_disk_sizeGB  = number
     publisher       = string
     offer           = string
     sku             = string

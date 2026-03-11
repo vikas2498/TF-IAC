@@ -181,3 +181,108 @@ resource "azurerm_windows_virtual_machine" "D01" {
     version   = "latest"
   }
 }
+
+resource "azurerm_resource_group" "D02" {
+  name     = var.D01_rg
+  location = data.azurerm_resource_group.dev-vnet-rg.location
+}
+
+resource "azurerm_network_interface" "nic" {
+    for_each = var.D02_vms
+
+    name                         = "${each.key}-nic"
+    location                     = var.D02_location 
+    resource_group_name          = var.D02_rg_name
+
+    depends_on = [
+        azurerm_resource_group.D02
+    ]
+
+    # primary ip configuation
+
+    ip_configuration {
+    name                          = "ipconfig01"
+    subnet_id                     = data.azurerm_subnet.dev-app-subnet.id
+    private_ip_address_allocation = "Static"
+    private_ip_address            = each.value.private_ips[0]
+    primary                       = true
+  }
+
+  # secondary IP configuration
+    
+    dynamic ip_configuration {
+        for_each = slice(each.value.private_ips, 1, length(each.value.private_ips) )
+
+        content {
+            name                            = format("ipconfig%02d", ip_configuration.key + 2)
+            subnet_id                       = data.azurerm_subnet.dev-app-subnet.id
+            private_ip_address_allocation   = "Static"
+            private_ip_address              = ip_configuration.value
+            primary                         = false
+        }
+    }
+ 
+}
+
+resource "azurerm_linux_virtual_machine" "D02" {
+    for_each = {
+        for k, v in var.D02_vms : k => v if v.os_type == "linux"
+    }
+
+    name                = each.key
+    resource_group_name = var.D02_rg_name
+    location            = var.D02_location
+    size                = each.value.vm_size
+    admin_username      = each.value.admin_username
+    admin_password      = each.value.admin_password
+
+    network_interface_ids = [
+    azurerm_network_interface.nic[each.key].id
+  ]
+
+  os_disk {
+    name                 = "${each.key}_osDisk"
+    caching              = each.value.os_disk_caching
+    storage_account_type = each.value.os_storage_account_type
+    disk_size_gb         = each.value.os_disk_sizeGB
+  }
+
+  source_image_reference {
+    publisher = each.value.publisher
+    offer     = each.value.offer
+    sku       = each.value.sku
+    version   = each.value.version
+  }
+}
+
+resource "azurerm_windows_virtual_machine" "D02" {
+    for_each = {
+        for k, v in var.D02_vms : k => v if v.os_type == "windows"
+    }
+
+    name                = each.key
+    resource_group_name = var.D02_rg_name
+    location            = var.D02_location
+    size                = each.value.vm_size
+    admin_username      = each.value.admin_username
+    admin_password      = each.value.admin_password
+
+    network_interface_ids = [
+    azurerm_network_interface.nic[each.key].id
+  ]
+
+  os_disk {
+    name                 = "${each.key}_osDisk"
+    caching              = each.value.os_disk_caching
+    storage_account_type = each.value.os_storage_account_type
+    disk_size_gb         = each.value.os_disk_sizeGB
+  }
+
+  source_image_reference {
+    publisher = each.value.publisher
+    offer     = each.value.offer
+    sku       = each.value.sku
+    version   = each.value.version
+  }
+}
+
