@@ -183,7 +183,7 @@ resource "azurerm_windows_virtual_machine" "D01" {
 }
 
 resource "azurerm_resource_group" "D02" {
-  name     = var.D01_rg
+  name     = var.D02_rg_name
   location = data.azurerm_resource_group.dev-vnet-rg.location
 }
 
