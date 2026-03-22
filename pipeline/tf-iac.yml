@@ -7,6 +7,7 @@ trigger:
 - feature/net-resources-weu
 
 pool:
+  name: 'Azure Pipelines'
   vmImage: ubuntu-latest
 
 variables:
