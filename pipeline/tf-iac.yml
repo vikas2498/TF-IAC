@@ -1,0 +1,64 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- feature/net-resources-weu
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+    serviceConnection: 'Dev-Azure-SVC'
+    terraformWorkingDirectory: 'TF-IAC'
+
+stages:
+  - stage: Dev-Plan
+    displayName: 'tf-plan-dev'
+    jobs:
+      - job: terraformDev
+        steps:
+          - task: TerraformInstaller@1.*
+            displayName: 'install terraform'
+            inputs:
+              terraformVersion: 'latest'
+            
+          - task: AzureCLI@2
+            displayName: 'Azure cli login'
+            inputs:
+             azureSubscription: $(serviceConnection)
+             scriptType: 'bash'
+             scriptLocation: 'inlineScript'
+             inlineScript: echo "Logged in to Azure"
+            
+          - script: terraform init
+            displayName: 'terraform init'
+            workingDirectory: $(terraformWorkingDirectory)
+          
+          - script: terraform plan -out=tfplan
+            displayName: 'Terraform Plan'
+            workingDirectory: $(terraformWorkingDirectory)
+
+  - stage: Dev-Apply
+    displayName: 'tf-apply-dev'
+    dependsOn: Dev-Plan
+    jobs:
+     - job: terraformDevApply
+       steps:
+        - task: TerraformInstaller@1.*
+          displayName: 'install terraform'
+          inputs:
+            terraformVersion: 'latest'
+        
+        - task: AzureCLI@2
+          displayName: 'Azure cli login'
+          inputs:
+           azureSubscription: $(serviceConnection)
+           scriptType: 'bash'
+           scriptLocation: 'inlineScript'
+           inlineScript: echo "Logged in to Azure"
+        
+        - script: terraform apply tfplan
+          displayName: 'Terraform Apply'
+          workingDirectory: $(terraformWorkingDirectory)
