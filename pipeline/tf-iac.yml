@@ -19,7 +19,7 @@ stages:
     jobs:
       - job: terraformDev
         steps:
-          - task: TerraformInstaller@1.*
+          - task: TerraformInstaller@1.10.5
             displayName: 'install terraform'
             inputs:
               terraformVersion: 'latest'
@@ -46,7 +46,7 @@ stages:
     jobs:
      - job: terraformDevApply
        steps:
-        - task: TerraformInstaller@1.*
+        - task: TerraformInstaller@1.10.5
           displayName: 'install terraform'
           inputs:
             terraformVersion: 'latest'
