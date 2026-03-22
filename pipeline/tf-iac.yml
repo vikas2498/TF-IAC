@@ -7,7 +7,7 @@ trigger:
 - feature/net-resources-weu
 
 pool:
-  name: Default
+  name: mac
   vmImage: ubuntu-latest
 
 variables:
