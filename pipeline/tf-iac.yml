@@ -14,8 +14,8 @@ variables:
     terraformWorkingDirectory: 'TF-IAC'
 
 stages:
-  - stage: Dev-Plan
-    displayName: 'tf-plan-dev'
+  - stage: Dev_Plan
+    displayName: 'tf_plan_dev'
     jobs:
       - job: terraformDev
         steps:
@@ -25,7 +25,7 @@ stages:
               terraformVersion: 'latest'
             
           - task: AzureCLI@2
-            displayName: 'Azure cli login'
+            displayName: 'Azure_cli_login'
             inputs:
              azureSubscription: $(serviceConnection)
              scriptType: 'bash'
@@ -40,9 +40,9 @@ stages:
             displayName: 'Terraform Plan'
             workingDirectory: $(terraformWorkingDirectory)
 
-  - stage: Dev-Apply
-    displayName: 'tf-apply-dev'
-    dependsOn: Dev-Plan
+  - stage: Dev_Apply
+    displayName: 'tf_apply_dev'
+    dependsOn: Dev_Plan
     jobs:
      - job: terraformDevApply
        steps:
@@ -52,7 +52,7 @@ stages:
             terraformVersion: 'latest'
         
         - task: AzureCLI@2
-          displayName: 'Azure cli login'
+          displayName: 'Azure_cli_login'
           inputs:
            azureSubscription: $(serviceConnection)
            scriptType: 'bash'
