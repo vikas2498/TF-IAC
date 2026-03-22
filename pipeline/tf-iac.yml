@@ -48,11 +48,6 @@ stages:
     jobs:
      - job: terraformDevApply
        steps:
-        - task: TerraformInstaller@1.10.5
-          displayName: 'install terraform'
-          inputs:
-            terraformVersion: 'latest'
-        
         - task: AzureCLI@2
           displayName: 'Azure_cli_login'
           inputs:
@@ -60,6 +55,13 @@ stages:
            scriptType: 'bash'
            scriptLocation: 'inlineScript'
            inlineScript: echo "Logged in to Azure"
+
+        - script: |
+              curl -sLo terraform.zip https://releases.hashicorp.com/terraform/1.7.5/terraform_1.7.5_linux_amd64.zip
+              unzip terraform.zip
+              sudo mv terraform /usr/local/bin/
+              terraform -version
+          displayName: 'Install Terraform'
         
         - script: terraform apply tfplan
           displayName: 'Terraform Apply'
